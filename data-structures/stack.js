@@ -1,6 +1,7 @@
 /*
 STACK
 Abstract data type
+
 LIFO - Last in, first out
 Collection of elements with push and pop operations.
 Note that there is a natural order. Elements are removed in the reverse order of their addition.
@@ -38,27 +39,40 @@ myStack.until(7)
 What's the time complexity?
  */
 
-function Stack(capacity) {
-  // implement me...
+export function Stack(capacity) {
+  this.store = {
+    values: {},
+    lastItemIndex: 0,
+  };
 }
 
 Stack.prototype.push = function (value) {
-  // implement me...
+  const newLastItemIndex = this.store.lastItemIndex + 1;
+
+  this.store.values[newLastItemIndex] = value;
+  this.store.lastItemIndex = newLastItemIndex;
+
+  return this.count();
 };
-// Time complexity:
 
 Stack.prototype.pop = function () {
-  // implement me...
+  const lastItem = this.store.values[this.store.lastItemIndex];
+
+  if (!lastItem) return null;
+
+  delete this.store.values[this.store.lastItemIndex];
+
+  this.store.lastItemIndex = this.store.lastItemIndex - 1;
+
+  return lastItem;
 };
-// Time complexity:
 
 Stack.prototype.peek = function () {
-  // implement me...
+  return this.store.values[this.store.lastItemIndex];
 };
-// Time complexity:
 
 Stack.prototype.count = function () {
-  // implement me...
+  return Object.keys(this.store.values || {}).length;
 };
 
 /*

@@ -4,7 +4,14 @@ describe("Stack exercise", () => {
   test("a", () => {
     const stack = new Stack();
 
-    expect(stack.store).toEqual({ lastItemIndex: 0, values: {} });
+    expect(stack).toEqual({
+      lastItemIndex: 0,
+      values: {},
+      capacity: {
+        max: null,
+        max_message: "Max capacity reached",
+      },
+    });
 
     stack.push("first");
 
@@ -36,7 +43,8 @@ describe("Stack exercise", () => {
 
     expect(stack.peek()).toBe("third");
   });
-  test("c", () => {
+
+  test("d", () => {
     const stack = new Stack();
 
     stack.push("first");
@@ -58,5 +66,20 @@ describe("Stack exercise", () => {
     stack.push("new");
 
     expect(stack.peek()).toBe("new");
+  });
+
+  test("Max capacity", () => {
+    const stack = new Stack(3);
+
+    stack.push("first");
+    stack.push("second");
+    stack.push("third");
+
+    expect(stack.count()).toBe(3);
+
+    const val = stack.push("fourth");
+
+    expect(stack.count()).toBe(3);
+    expect(val).toBe("Max capacity reached");
   });
 });

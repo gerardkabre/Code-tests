@@ -40,39 +40,49 @@ What's the time complexity?
  */
 
 export function Stack(capacity) {
-  this.store = {
-    values: {},
-    lastItemIndex: 0,
+  this.values = {};
+  this.lastItemIndex = 0;
+  this.capacity = {
+    max: capacity || null,
+    max_message: "Max capacity reached",
   };
 }
 
 Stack.prototype.push = function (value) {
-  const newLastItemIndex = this.store.lastItemIndex + 1;
+  if (this.validateMaxCapacity()) return this.capacity.max_message;
 
-  this.store.values[newLastItemIndex] = value;
-  this.store.lastItemIndex = newLastItemIndex;
+  const newLastItemIndex = this.lastItemIndex + 1;
+
+  this.values[newLastItemIndex] = value;
+  this.lastItemIndex = newLastItemIndex;
 
   return this.count();
 };
 
 Stack.prototype.pop = function () {
-  const lastItem = this.store.values[this.store.lastItemIndex];
+  const lastItem = this.values[this.lastItemIndex];
 
   if (!lastItem) return null;
 
-  delete this.store.values[this.store.lastItemIndex];
+  delete this.values[this.lastItemIndex];
 
-  this.store.lastItemIndex = this.store.lastItemIndex - 1;
+  this.lastItemIndex = this.lastItemIndex - 1;
 
   return lastItem;
 };
 
 Stack.prototype.peek = function () {
-  return this.store.values[this.store.lastItemIndex];
+  return this.values[this.lastItemIndex];
 };
 
 Stack.prototype.count = function () {
-  return Object.keys(this.store.values || {}).length;
+  return Object.keys(this.values || {}).length;
+};
+
+Stack.prototype.validateMaxCapacity = function () {
+  if (!this.capacity.max) return false;
+
+  return Object.keys(this.values).length >= this.capacity.max;
 };
 
 /*

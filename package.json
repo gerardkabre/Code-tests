@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "start": "node index.js",
+    "test": "yarn jest --watchAll"
+  },
+  "name": "what",
+  "version": "1",
+  "main": "index.js",
+  "author": "gerard",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3"
+  }
+}

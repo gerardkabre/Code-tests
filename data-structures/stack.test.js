@@ -82,4 +82,19 @@ describe("Stack exercise", () => {
     expect(stack.count()).toBe(3);
     expect(val).toBe("Max capacity reached");
   });
+
+  test("Contains", () => {
+    const stack = new Stack();
+
+    stack.push("first");
+    stack.push("second");
+    stack.push(5);
+
+    expect(stack.contains("first")).toBeTruthy();
+    expect(stack.contains("second")).toBeTruthy();
+    expect(stack.contains(5)).toBeTruthy();
+
+    expect(stack.contains("other")).toBeFalsy();
+    expect(stack.contains(6)).toBeFalsy();
+  });
 });

@@ -85,6 +85,12 @@ Stack.prototype.validateMaxCapacity = function () {
   return Object.keys(this.values).length >= this.capacity.max;
 };
 
+Stack.prototype.contains = function (valueToCheck) {
+  return Object.values(this.values || {}).some(
+    (value) => value === valueToCheck
+  );
+};
+
 /*
 *** Exercises:
 1. Implement a stack with a min method which returns the minimum element currently in the stack. 
